@@ -21,9 +21,9 @@ items:
         containers:
         - image: hasura/hello-world:latest
           env:
-            - key: FACEBOOK_VERIFY_TOKEN
+            - name: FACEBOOK_VERIFY_TOKEN
               value: my_password
-            - key: FACEBOOK_PAGE_ACCESS_TOKEN
+            - name: FACEBOOK_PAGE_ACCESS_TOKEN
               value: EAAZAZAhL1jbuEBACGr4EzJlNOQd9IZCEyk7J6eJbvbs7qimW16TT1SJ8ol0a4gAESg6iWvLgVZBN4Kv3D4ESRYGJrWfmrBlFjmqODaL5BAN7twhpOS8Cplce34XUppWQsZBZCwgpZAS4z8DBHtEmiteS5CIZAZAqAzkwxYvKvOnBjPgZDZD
           imagePullPolicy: IfNotPresent
           name: bot
