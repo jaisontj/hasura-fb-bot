@@ -16,7 +16,7 @@ let MOVIE_DB_BASE_URL = 'https://www.themoviedb.org/movie/';
 
 //your routes here
 app.get('/', function (req, res) {
-    res.send("Hello World, I am a bot.");
+    res.send("Hello World, I am a bot. \n VERIFY TOKEN: " + FACEBOOK_VERIFY_TOKEN + "\n ACCESS TOKEN: " + FACEBOOK_PAGE_ACCESS_TOKEN);
 });
 
 app.get('/webhook/', function(req, res) {
