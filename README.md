@@ -13,6 +13,13 @@ For the chat bot to function we'll need a server that will receive the messages 
   + [Deploying to the Hasura cluster](#step-4---deploying-our-project-on-the-cluster)
   + [Checking the microservice status](#step-5---checking-the-microservice-status)
 * [Developing the Facebook Messenger bot](#developing-the-facebook-messenger-bot)
+  + [Adding node dependencies](#adding-additional-node-dependencies)
+  + [Setting up a facebook application](#setting-up-a-facebook-application)
+  + [Enabling webhooks](#enabling-webhooks)
+  + [Page access token](#page-access-token)
+  + [Checking microservice logs](#checking-the-logs-from-our-microservice)
+  + [Fetching movie details](#fetching-movie-details)
+  + [BONUS](#bonus-typing-indicator)
 * [Publishing your bot](#publishing-your-bot)
 * [Future Scope](#future-scope)
 
