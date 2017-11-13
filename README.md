@@ -103,6 +103,8 @@ In your fb app page, scroll down until you find a card name `Webhooks`. Click on
 
 In the pop up, set your `callback URL` to be the `EXTERNAL-URL` of the `bot` service appended with a `/webhook` path(in this case -> https://bot.apology69.hasura-app.io/webhook/) and set the `Verify Token` as the value you set in your secrets above. (in the command $ hasura secrets update bot.fb_verify_token.key <YOUR-VERIFY-TOKEN>). Submit and save this.
 
+Also, ensure that you select your page in the section that says `Select a page to subscribe your webhook to the page events` under the `Webhooks` card.
+
 Next, open up your facebook page.
 
 * Click on the button named **+ Add Button**.
