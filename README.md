@@ -117,6 +117,10 @@ Next, open up your facebook page.
 
 Test out your bot, on receiving a movie name it should respond with details about that movie.
 
+## Tutorial
+
+Follow along for a step by step guide on developing and deploying this facebook messenger bot on Hasura.
+
 ## Sections
 * [Architecture](#architecture)
 * [Getting started](#getting-started)
