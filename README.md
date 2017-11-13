@@ -4,6 +4,66 @@ This tutorial consists of a simple facebook messenger bot which, when given a mo
 
 For the chat bot to function we'll need a server that will receive the messages sent by the Facebook users, process this message and respond back to the user. To send messages back to the server we will use the graph API provided by Facebook. For the Facebook servers to talk to our server, the endpoint URL of our server should be accessible to the Facebook server and should use a secure HTTPS URL. For this reason, running our server locally will not work and instead we need to host our server online. In this tutorial, we are going to deploy our server on Hasura which automatically provides SSL-enabled domains.
 
+## Quickstart
+
+If you have developed a facebook messenger bot before and want to skip to the part where you want to see this project work, follow the instructions below:
+
+Before you begin, keep a note of the following:
+
+* Your facebook page access token
+* The verify token you prefer for your bot (used by the `GET` webhook)
+* In this project, we are using https://www.themoviedb.org/ to get information about the movie, to access their APIs you need an API key. You can find instructions to get one [here](https://developers.themoviedb.org/3/getting-started).
+
+```sh
+$ hasura quickstart jaison/fb-bot
+$ cd fb-bot
+# Add FACEBOOK_VERIFY_TOKEN to secrets
+$ hasura secrets update bot.fb_verify_token.key <YOUR-VERIFY-TOKEN>
+# Add FACEBOOK_PAGE_ACCESS_TOKEN to secrets
+$ hasura secrets update bot.fb_page_token.key <YOUR-FB-PAGE-ACCESS-TOKEN>
+# Add Movie db api token to secrets
+$ hasura secrets update bot.movie_db_token.key <YOUR-MOVIEDB-API-TOKEN>
+# Deploy
+$ git add . && git commit -m "Deployment commit"
+$ git push hasura master
+```
+
+After the `git push` completes:
+
+```sh
+$ hasura microservice list
+```
+
+You will get an output like so:
+
+```sh
+INFO Getting microservices...                     
+INFO Custom microservices:                        
+NAME   STATUS    INTERNAL-URL(tcp,http)   EXTERNAL-URL
+bot    Running   bot.default              https://bot.apology69.hasura-app.io
+
+INFO Hasura microservices:                        
+NAME            STATUS    INTERNAL-URL(tcp,http)   EXTERNAL-URL
+auth            Running   auth.hasura              https://auth.apology69.hasura-app.io
+data            Running   data.hasura              https://data.apology69.hasura-app.io
+filestore       Running   filestore.hasura         https://filestore.apology69.hasura-app.io
+gateway         Running   gateway.hasura           
+le-agent        Running   le-agent.hasura          
+notify          Running   notify.hasura            https://notify.apology69.hasura-app.io
+platform-sync   Running   platform-sync.hasura     
+postgres        Running   postgres.hasura          
+session-redis   Running   session-redis.hasura     
+sshd            Running   sshd.hasura              
+vahana          Running   vahana.hasura
+```
+
+Find the EXTERNAL-URL for the service named `bot`(in this case -> https://bot.apology69.hasura-app.io). Use this URL as your webhook url when creating your fb bot.
+
+![Enable webhooks2](https://raw.githubusercontent.com/jaisontj/hasura-fb-bot/master/assets/tutorial_fb_bot_enable_webhooks2.png "Enable webhooks2")
+
+Test out your bot, on receiving a movie name it should respond with details about that movie.
+
+
 ## Sections
 * [Architecture](#architecture)
 * [Pre-requisites](#pre-requisites)
@@ -20,6 +80,7 @@ For the chat bot to function we'll need a server that will receive the messages 
   + [Checking microservice logs](#checking-the-logs-from-our-microservice)
   + [Fetching movie details](#fetching-movie-details)
   + [BONUS](#bonus-typing-indicator)
+* [Managing secrets and tokens](#managing-secrets-and-token)
 * [Publishing your bot](#publishing-your-bot)
 * [Future Scope](#future-scope)
 
@@ -445,7 +506,7 @@ Now that our bot responds to the user. Let's take the message sent by the user (
 * To fetch details on the movie, we are going to use the APIs provided by https://www.themoviedb.org/
 
   - APIs provided by https://www.themoviedb.org/ are not open, so you'll need to create an account with them and get an API key.
-  - After creating an account, follow the instructions here https://developers.themoviedb.org/3/getting-started to get an API key.
+  - After creating an account, follow the instructions [here](https://developers.themoviedb.org/3/getting-started) to get an API key.
   - We are going to use a npm library called moviedb
 
     - Switch to your terminal
@@ -667,8 +728,7 @@ Currently, the response sent by our bot looks ugly. So let's improve our respons
 
 Congratulations! We have just built a messenger bot!!
 
-Bonus: Typing Indicator
------------------------
+#### Bonus: Typing Indicator
 
 One thing that is missing in our bot is that, in the time between receiving the name of the movie to replying to the user with the details. The user does not have any idea about what is going on, it should be nice to show a loading indicator of sorts (the three dots that comes up in messenger when a user is typing something). Let's see how we can do that.
 
@@ -733,6 +793,130 @@ One thing that is missing in our bot is that, in the time between receiving the 
 Let's see this in action:
 
 ![Bot3](https://raw.githubusercontent.com/jaisontj/hasura-fb-bot/master/assets/tutorial_fb_bot_image3.png "Bot3")
+
+## Managing secrets and tokens
+
+Currently, your secrets are stored in the `server.js` file. And since you are going to version control your code, it is better to store these secrets elsewhere, where it is not open for anyone to view/use.
+
+### Adding information to secrets
+
+For this particular example, we have the FACEBOOK_VERIFY_TOKEN, FACEBOOK_PAGE_ACCESS_TOKEN and the Api token obtained from themoviedb. Let's store these in `hasura secrets`.
+
+```sh
+# Navigate to the root hasura project directory
+# Add FACEBOOK_VERIFY_TOKEN to secrets
+$ hasura secrets update bot.fb_verify_token.key messenger_bot_password
+# Add FACEBOOK_PAGE_ACCESS_TOKEN to secrets
+$ hasura secrets update bot.fb_page_token.key EAATZCaDcXCGMBAKAFATDhosSC5PyrdwrIqmAlGuLvYVq1lnuzOTFeDZCFkgARElOffIZAZCiIJYGvzkN9cIbZAYDT7WyD3aWlmsWAoawsMqUh4VpZAmgBZAwREjZAaHy3usjoAfgcSWg7ZAI9J2P4FGJiOyO3pc5WgZAgZDZD
+# Add Movie db api token to secrets
+$ hasura secrets update bot.movie_db_token.key asdasdafaeqwqwdqwddq
+```
+
+### Accessing secrets
+
+The secrets we have set above are going to be accessed in our nodejs app as environment variables. To do this, open up `k8s.yaml` file located at `microservices/bot`
+
+Add the following below `item.spec.spec.image`
+
+```yaml
+env:
+  - name: FACEBOOK_VERIFY_TOKEN
+    value:
+      secretKeyRef:
+        key: bot.fb_verify_token.key
+        name: hasura-secrets
+  - name: FACEBOOK_PAGE_ACCESS_TOKEN
+    value:
+      secretKeyRef:
+        key: bot.fb_page_token.key
+        name: hasura-secrets
+  - name: MOVIE_DB_TOKEN
+    value:
+      secretKeyRef:
+        key: bot.movie_db_token.key
+        name: hasura-secrets
+```
+
+Your `k8s.yaml` should now look like:
+
+```yaml
+apiVersion: v1
+items:
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    creationTimestamp: null
+    labels:
+      app: bot
+      hasuraService: custom
+    name: bot
+    namespace: '{{ cluster.metadata.namespaces.user }}'
+  spec:
+    replicas: 1
+    strategy: {}
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: bot
+      spec:
+        containers:
+        - image: hasura/hello-world:latest
+          env:
+            - name: FACEBOOK_VERIFY_TOKEN
+              value:
+                secretKeyRef:
+                  key: bot.fb_verify_token.key
+                  name: hasura-secrets
+            - name: FACEBOOK_PAGE_ACCESS_TOKEN
+              value:
+                secretKeyRef:
+                  key: bot.fb_page_token.key
+                  name: hasura-secrets
+            - name: MOVIE_DB_TOKEN
+              value:
+                secretKeyRef:
+                  key: bot.movie_db_token.key
+                  name: hasura-secrets
+          imagePullPolicy: IfNotPresent
+          name: bot
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources: {}
+        securityContext: {}
+        terminationGracePeriodSeconds: 0
+  status: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: null
+    labels:
+      app: bot
+      hasuraService: custom
+    name: bot
+    namespace: '{{ cluster.metadata.namespaces.user }}'
+  spec:
+    ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      app: bot
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+kind: List
+metadata: {}
+```
+
+To access these in `server.js`
+
+```javascript
+let mdb = require('moviedb')(process.env.MOVIE_DB_TOKEN);
+let FACEBOOK_VERIFY_TOKEN = process.env.FACEBOOK_VERIFY_TOKEN;
+let FACEBOOK_PAGE_ACCESS_TOKEN = process.env.FACEBOOK_PAGE_ACCESS_TOKEN;
+```
 
 ## Publishing your bot
 
