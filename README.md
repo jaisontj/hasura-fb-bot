@@ -8,12 +8,10 @@ For the chat bot to function we'll need a server that will receive the messages 
 * [Architecture](#architecture)
 * [Pre-requisites](#pre-requisites)
 * [Getting started](#getting-started)
-
   + [Login to Hasura](#step-1---login-to-hasura)
   + [Getting a basic Hasura project](#step-2---starting-out-with-a-basic-hasura-project)
   + [Deploying to the Hasura cluster](#step-4---deploying-our-project-on-the-cluster)
   + [Checking the microservice status](#step-5---checking-the-microservice-status)
-  
 * [Developing the Facebook Messenger bot](#developing-the-facebook-messenger-bot)
 * [Publishing your bot](#publishing-your-bot)
 * [Future Scope](#future-scope)
