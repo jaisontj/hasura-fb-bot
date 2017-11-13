@@ -77,16 +77,16 @@ You will get an output like so:
 INFO Getting microservices...                     
 INFO Custom microservices:                        
 NAME   STATUS    INTERNAL-URL(tcp,http)   EXTERNAL-URL
-bot    Running   bot.default              https://bot.animosity46.hasura-app.io
+bot    Running   bot.default              https://bot.apology69.hasura-app.io
 
 INFO Hasura microservices:                        
 NAME            STATUS    INTERNAL-URL(tcp,http)   EXTERNAL-URL
-auth            Running   auth.hasura              https://auth.animosity46.hasura-app.io
-data            Running   data.hasura              https://data.animosity46.hasura-app.io
-filestore       Running   filestore.hasura         https://filestore.animosity46.hasura-app.io
+auth            Running   auth.hasura              https://auth.apology69.hasura-app.io
+data            Running   data.hasura              https://data.apology69.hasura-app.io
+filestore       Running   filestore.hasura         https://filestore.apology69.hasura-app.io
 gateway         Running   gateway.hasura           
 le-agent        Running   le-agent.hasura          
-notify          Running   notify.hasura            https://notify.animosity46.hasura-app.io
+notify          Running   notify.hasura            https://notify.apology69.hasura-app.io
 platform-sync   Running   platform-sync.hasura     
 postgres        Running   postgres.hasura          
 session-redis   Running   session-redis.hasura     
@@ -94,7 +94,7 @@ sshd            Running   sshd.hasura
 vahana          Running   vahana.hasura
 ```
 
-`animosity46` is the name of the cluster. You would get a different cluster and hence the `EXTERNAL_URL` for your `Custom microservice` named `bot` would be https://bot.your-cluster-name.hasura-app.io. Currently, this endpoint only returns a simple "Hello World!".
+`apology69` is the name of the cluster. You would get a different cluster and hence the `EXTERNAL_URL` for your `Custom microservice` named `bot` would be https://bot.YOUR-CLUSTER-NAME.hasura-app.io. Currently, this endpoint only returns a simple "Hello World!".
 
 The code for the app is inside the `microservices/bot` directory. Open the `server.js` file located at `microservices/bot/app/src` using the text editor of your choosing:
 
@@ -187,7 +187,7 @@ and the following after **var app = express();**
 
 #### Enabling Webhooks
 
-* Scroll to down to the **Webhooks** section and click on the **Setup Webhooks** button.
+* Scroll down to the **Webhooks** section and click on the **Setup Webhooks** button.
 
 ![Enable webhooks](https://raw.githubusercontent.com/jaisontj/hasura-fb-bot/master/assets/tutorial_fb_bot_enable_webhooks.png "Enable webhooks")
 
@@ -197,8 +197,8 @@ On the pop up that comes up, we need to fill in a box with a `Callback URL` and 
 
 * The **Callback URL** is the url that the facebook servers will hit
 
-  + To verify our server with the **Verify Token** we give it. This will be a GET request.
-  + To send the messages that our bot receives from users. This will be a POST request.
+  + To verify our server with the **Verify Token** we give it. This will be a `GET` request.
+  + To send the messages that our bot receives from users. This will be a `POST` request.
 
 * This means that we need to create a path on our server which can be used by the facebook server to communicate to our server. To do this, switch back to your terminal and open **service.js** file.
 * Paste the following code:
@@ -226,16 +226,15 @@ In the above code, we are:
 * choosing an arbitrary password that we will use as our **Verify Token** while **Enabling Webhooks**.
 * creating a path **\\webhook\\** which will accept :
 
-  - A GET request to verify the **Verify Token** being sent by the facebook servers. Incase, the token is not the same as the one we have set, we respond with an error.
-  - A POST request where all of the messages that our bot receives will be posted to, by the facebook server.
+  - A `GET` request to verify the **Verify Token** being sent by the facebook servers. Incase, the token is not the same as the one we have set, we respond with an error.
+  - A `POST` request where all of the messages that our bot receives will be posted to, by the facebook server.
 
-    + Here, we are just printing out the received request and responding with a status code of 200.
+    + At this point, we are just printing out the received request and responding with a status code of 200.
 
 * Let's deploy this code
 
-  - Navigate to your root hasura project directory
-
 ```sh
+# Navigate to the root hasura project directory
 $ git add . && git commit -am "Added webhook"
 $ git push hasura master
 ```
@@ -244,7 +243,7 @@ $ git push hasura master
 
 * Now, switch back to your facebook app page and fill in the pop up with:
 
-  + **Callback URL**: https://bot.YOUR-CLUSTER-NAME.hasura-app.io/webhook/
+  + **Callback URL**: https://bot.YOUR-CLUSTER-NAME.hasura-app.io/webhook/ //Replace YOUR-CLUSTER-NAME with the name of your cluster.
   + **Verify Token**: messenger_bot_password
   + **Subscription Fields**: Check all
 
@@ -288,7 +287,7 @@ $ curl -X POST "https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=
     })
 ```
 
-We have created a POST endpoint with the same path name as '\webhook\' and we are simply printing out the request in the console and responding with a status of 200;
+We have created a `POST` endpoint with the same path name as '\webhook\' and we are simply printing out the request in the console and responding with a status of 200;
 
 * Deploy this code.
 * Switch to your browser and open up the page you just created to generate the Page Access Token.
@@ -308,8 +307,7 @@ $ hasura logs
 
 * The response printed in the logs will look like so
 
-.. code-block:: JSON
-
+```json
     {
     	"object": "page",
     	"entry": [
@@ -335,6 +333,7 @@ $ hasura logs
     		}
     	]
     }
+```
 
 * The **senderId** and the **text** keys need to be extracted from this reponse.
 
@@ -725,8 +724,8 @@ Let's see this in action:
 ## Publishing your bot
 
 Currently, our bot is not published and for it to work with users other than you. You need to submit your bot to Facebook for review. Once Facebook approves your bot, it will be live :)
-The steps involved in publishing your bot to Facebook is out of the scope of this tutorial and maybe covered in another tutorial.
+The steps involved in publishing your bot to Facebook can be found [here](https://developers.facebook.com/docs/messenger-platform/app-review/).
 
 ## Future Scope
 
-Currently, our bot is quite simple and does no analysis(NLP) on the messages sent by the user. You can integrate with `wit.ai <https://wit.ai/>`_ to do this.
+Currently, our bot is quite simple and does no analysis(NLP) on the messages sent by the user. You can integrate with [wit.ai](https://wit.ai/) to do this.
