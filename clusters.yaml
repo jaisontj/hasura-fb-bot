@@ -3,6 +3,5 @@
     configmap: controller-conf
     namespace: hasura
   data: null
-  kubeContext: h34-calaboose57-stg
-  name: h34-calaboose57-stg
-  services: null
+  kubeContext: animosity46
+  name: animosity46
