@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var express = require('express');
 var app = express();
 
-let mdb = require('moviedb')('87435796fadd1be0372685ee1fcc033f');
+let mdb = require('moviedb')(process.env.MOVIE_DB_TOKEN);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
