@@ -4,8 +4,6 @@ This tutorial consists of a simple facebook messenger bot which, when given a mo
 
 For the chat bot to function we'll need a server that will receive the messages sent by the Facebook users, process this message and respond back to the user. To send messages back to the server we will use the graph API provided by Facebook. For the Facebook servers to talk to our server, the endpoint URL of our server should be accessible to the Facebook server and should use a secure HTTPS URL. For this reason, running our server locally will not work and instead we need to host our server online. In this tutorial, we are going to deploy our server on Hasura which automatically provides SSL-enabled domains.
 
-We will use Node.js along with the express framework to build our server. Ensure that you have Node installed on your computer, do this by running `node-v` in the terminal. If you do not have Node installed you can get it from https://nodejs.org
-
 ## Sections
 * [Architecture](#architecture)
 * [Pre-requisites](#Pre-requisites)
@@ -15,9 +13,14 @@ We will use Node.js along with the express framework to build our server. Ensure
 
 ![Architecture](https://raw.githubusercontent.com/jaisontj/hasura-fb-bot/master/assets/tutorial_fb_bot_architecture.png "Architecture")
 
+## Pre-requisites
+
+* We will use Node.js along with the express framework to build our server. Ensure that you have Node installed on your computer, do this by running `node-v` in the terminal. If you do not have Node installed you can get it from https://nodejs.org
+
+* Before you begin, ensure that you have the latest version of the `hasura cli` installed. You can find instructions to download the `hasura cli` from [here](https://docs.hasura.io/0.15/manual/install-hasura-cli.html)
+
 ## Getting started
 
-Before you begin, ensure that you have the latest version of the hasura cli installed.
 
 ### Step 1 - Login to Hasura
 
