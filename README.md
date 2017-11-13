@@ -6,8 +6,11 @@ For the chat bot to function we'll need a server that will receive the messages 
 
 ## Sections
 * [Architecture](#architecture)
-* [Pre-requisites](#Pre-requisites)
+* [Pre-requisites](#pre-requisites)
 * [Getting started](#getting-started)
+* [Developing the Facebook Messenger bot](#developing-the-facebook-messenger-bot)
+* [Publishing your bot](#publishing-your-bot)
+* [Future Scope](#future-scope)
 
 ## Architecture
 
@@ -20,7 +23,6 @@ For the chat bot to function we'll need a server that will receive the messages 
 * Before you begin, ensure that you have the latest version of the `hasura cli` installed. You can find instructions to download the `hasura cli` from [here](https://docs.hasura.io/0.15/manual/install-hasura-cli.html)
 
 ## Getting started
-
 
 ### Step 1 - Login to Hasura
 
