@@ -184,11 +184,11 @@ and the following after **var app = express();**
 
 * Scroll to down to the **Webhooks** section and click on the **Setup Webhooks** button.
 
-.. image:: ../img/tutorial_fb_bot_enable_webhooks.png
+![Enable webhooks](https://raw.githubusercontent.com/jaisontj/hasura-fb-bot/master/assets/tutorial_fb_bot_enable_webhooks.png "Enable webhooks")
 
 On the pop up that comes up, we need to fill in a box with a `Callback URL` and another one with a `Verify Token`.
 
-.. image:: ../img/tutorial_fb_bot_enable_webhooks2.png
+![Enable webhooks2](https://raw.githubusercontent.com/jaisontj/hasura-fb-bot/master/assets/tutorial_fb_bot_enable_webhooks2.png "Enable webhooks2")
 
 * The **Callback URL** is the url that the facebook servers will hit
 
@@ -245,7 +245,7 @@ $ git push hasura master
 
 * Click on **Verify and save**.
 
-.. image:: ../img/tutorial_fb_bot_enable_webhooks3.png
+![Enable webhooks3](https://raw.githubusercontent.com/jaisontj/hasura-fb-bot/master/assets/tutorial_fb_bot_enable_webhooks3.png "Enable webhooks3")
 
 #### PAGE ACCESS TOKEN
 
@@ -255,9 +255,9 @@ To start using the bot, we need a facebook page to host our bot.
 * Choose a page from the dropdown (Incase you do not have a page, create one)
 * Once you have selected a page, a *Page Access Token* will be generated for you.
 
-.. image:: ../img/tutorial_fb_bot_page_token.png
+![Page token](https://raw.githubusercontent.com/jaisontj/hasura-fb-bot/master/assets/tutorial_fb_bot_page_token.png "Page token")
 
-* Copy this page access token in your server.js file
+* Copy this page access token in your `server.js` file
 
 ```javascript
     let FACEBOOK_PAGE_ACCESS_TOKEN = "EAATZCaDcXCGMBAKAFATDhosSC5PyrdwrIqmAlGuLvYVq1lnuzOTFeDZCFkgARElOffIZAZCiIJYGvzkN9cIbZAYDT7WyD3aWlmsWAoawsMqUh4VpZAmgBZAwREjZAaHy3usjoAfgcSWg7ZAI9J2P4FGJiOyO3pc5WgZAgZDZD";
@@ -289,7 +289,7 @@ We have created a POST endpoint with the same path name as '\webhook\' and we ar
 * Switch to your browser and open up the page you just created to generate the Page Access Token.
 * Click on the button named **+ Add Button**.
 
-.. image:: ../img/tutorial_fb_bot_page_add_button.png
+![Add button](https://raw.githubusercontent.com/jaisontj/hasura-fb-bot/master/assets/tutorial_fb_bot_page_add_button.png "Add button")
 
 * Next, click on **Use our messenger bot**. Then, **Get Started** and finally **Add Button**.
 * You will now see that the **+ Add button** has now changed to **Get Started**. Hovering over this will show you a list with an item named **Test this button**. Click on it to start chatting with your bot.
@@ -332,7 +332,6 @@ $ hasura logs
     }
 
 * The **senderId** and the **text** keys need to be extracted from this reponse.
-
 
 #### Coding out the bot
 
@@ -532,7 +531,7 @@ Now that our bot responds to the user. Let's take the message sent by the user (
 
 * Deploy this code and test it out.
 
-.. image:: ../img/tutorial_fb_bot_image1.png
+![Bot](https://raw.githubusercontent.com/jaisontj/hasura-fb-bot/master/assets/tutorial_fb_bot_image1.png "Bot")
 
 #### Sending Generic Response
 
@@ -643,11 +642,11 @@ Currently, the response sent by our bot looks ugly. So let's improve our respons
 
 * Deploy this code and test out your bot
 
-.. image:: ../img/tutorial_fb_bot_image2.png
+![Bot2](https://raw.githubusercontent.com/jaisontj/hasura-fb-bot/master/assets/tutorial_fb_bot_image2.png "Bot2")
 
 * Clicking on **View more details** should take you to a new page.
 
-.. image:: ../img/tutorial_fb_bot_movie_details.png
+![Movie Details](https://raw.githubusercontent.com/jaisontj/hasura-fb-bot/master/assets/tutorial_fb_bot_movie_details.png "Movie Details")
 
 Congratulations! We have just built a messenger bot!!
 
@@ -716,7 +715,7 @@ One thing that is missing in our bot is that, in the time between receiving the 
 
 Let's see this in action:
 
-.. image:: ../img/tutorial_fb_bot_image3.png
+![Bot3](https://raw.githubusercontent.com/jaisontj/hasura-fb-bot/master/assets/tutorial_fb_bot_image3.png "Bot3")
 
 ## Publishing your bot
 
