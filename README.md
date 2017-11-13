@@ -170,15 +170,15 @@ and the following after **var app = express();**
 * Navigate to https://developers.facebook.com/apps/
 * Click on **'+ Create a new app’**.
 
-.. image:: ../img/tutorial_fb_app_screen.png
+![Fb app screen](https://raw.githubusercontent.com/jaisontj/hasura-fb-bot/master/assets/tutorial_fb_app_screen.png "fb app screen")
 
 * Give a display name for your app and a contact email.
 
-.. image:: ../img/tutorial_fb_app_screen2.png
+![Fb app screen2](https://raw.githubusercontent.com/jaisontj/hasura-fb-bot/master/assets/tutorial_fb_app_screen2.png "fb app screen2")
 
 * In the select a product screen, hover over **Messenger** and click on **Set Up**
 
-.. image:: ../img/tutorial_fb_app_screen3.png
+![Fb app screen3](https://raw.githubusercontent.com/jaisontj/hasura-fb-bot/master/assets/tutorial_fb_app_screen3.png "fb app screen3")
 
 #### Enabling Webhooks
 
