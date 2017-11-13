@@ -1,4 +1,4 @@
-description: Blank template for a Hasura project
-keywords: base, getting-started
-name: base
+description: A facebook messenger bot deployed on Hasura.
+keywords: bot, facebook, nodejs, express, node, javascript, messenger, messenger bot
+name: fb-bot
 platformVersion: v0.15.3
