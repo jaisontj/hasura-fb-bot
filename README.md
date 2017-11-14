@@ -53,7 +53,7 @@ $ curl -X POST "https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=
 ```sh
 $ hasura quickstart jaison/fb-bot
 $ cd fb-bot
-# Add FACEBOOK_VERIFY_TOKEN to secrets
+# Add FACEBOOK_VERIFY_TOKEN to secrets. This is any pass phrase that you decide on, keep a note on what you are choosing as your verify token, we will be using it later while setting things up for your bot on the facebook developer page.
 $ hasura secrets update bot.fb_verify_token.key <YOUR-VERIFY-TOKEN>
 # Add FACEBOOK_PAGE_ACCESS_TOKEN to secrets
 $ hasura secrets update bot.fb_page_token.key <YOUR-FB-PAGE-ACCESS-TOKEN>
@@ -101,13 +101,16 @@ In your fb app page, scroll down until you find a card name `Webhooks`. Click on
 
 ![Enable webhooks2](https://raw.githubusercontent.com/jaisontj/hasura-fb-bot/master/assets/tutorial_fb_bot_enable_webhooks2.png "Enable webhooks2")
 
-In the pop up, set your `callback URL` to be the `EXTERNAL-URL` of the `bot` service appended with a `/webhook` path(in this case -> https://bot.apology69.hasura-app.io/webhook/) and set the `Verify Token` as the value you set in your secrets above. (in the command $ hasura secrets update bot.fb_verify_token.key <YOUR-VERIFY-TOKEN>). Submit and save this.
-
-Also, ensure that you select your page in the section that says `Select a page to subscribe your webhook to the page events` under the `Webhooks` card.
+* The `callback URL` is the URL that the facebook servers will hit to verify as well as forward the messages sent to our bot. The nodejs app in this project uses the `/webhook` path as the `callback URL`. Making the `callback URL` https://bot.YOUR-CLUSTER-NAME.hasura-app.io/webhook (in this case -> https://bot.apology69.hasura-app.io/webhook/)
+* The `verify token`is the verify token that you set in your secrets above (in the command $ hasura secrets update bot.fb_verify_token.key <YOUR-VERIFY-TOKEN>)
+* After selecting all the `Subsciption Fields`. Submit and save.
+* You will also see another section under `Webhooks` that says `Select a page to subscribe your webhook to the page events`, ensure that you select the respective facebook page here.
 
 Next, open up your facebook page.
 
-* Click on the button named **+ Add Button**.
+* Hover over the **Send Message** button and click on Test Button.
+
+* Instead, if your button says **+ Add Button**, click on it.
 
 ![Add button](https://raw.githubusercontent.com/jaisontj/hasura-fb-bot/master/assets/tutorial_fb_bot_page_add_button.png "Add button")
 
