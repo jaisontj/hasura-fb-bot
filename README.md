@@ -44,7 +44,7 @@ For the chat bot to function we'll need a server that will receive the messages 
 $ curl -X POST "https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=<PAGE_ACCESS_TOKEN>"
 ```
 
-* In this project, we are using https://www.themoviedb.org/ to get information about the movie, to access their APIs you need an API key. You can find instructions to get one [here](https://developers.themoviedb.org/3/getting-started).
+* In this project, we are using https://www.themoviedb.org/ to get information about the movie, to access their APIs you need an API key(v3). You can find instructions to get one [here](https://developers.themoviedb.org/3/getting-started).
 
 ### Getting the Hasura project
 
