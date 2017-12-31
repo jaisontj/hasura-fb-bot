@@ -120,4 +120,4 @@ Test out your bot, on receiving a movie name it should respond with details abou
 
 ## Support
 
-If you happen to get stuck anywhere, feel free to mail me at jaisontj92@gmail.com. Also, if you find a bug or an issue, you can raise an issue [here](https://github.com/jaisontj/hasura-fb-bot)
+If you happen to get stuck anywhere, feel free to raise an issue [here](https://github.com/jaisontj/hasura-fb-bot)
